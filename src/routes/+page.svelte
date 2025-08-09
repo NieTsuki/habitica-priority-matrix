@@ -1,9 +1,19 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
+  import Habitica from "$lib/habitica";
+
   let selectedTab = $state("habits");
 
   function selectTab(tab: string) {
     selectedTab = tab;
   }
+
+  onMount(() => {
+    if (!Habitica.instance) {
+      goto("/login");
+    }
+  });
 </script>
 
 <!-- Top Navigation Bar -->
