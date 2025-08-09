@@ -2,10 +2,11 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import Habitica from "$lib/habitica";
+  import { Tab } from "./index";
 
-  let selectedTab = $state("habits");
+  let selectedTab: Tab = $state(Tab.Habits);
 
-  function selectTab(tab: string) {
+  function selectTab(tab: Tab) {
     selectedTab = tab;
   }
 
@@ -53,26 +54,26 @@
       <div class="border-b border-[#edecee]">
         <div class="flex">
           <button
-            onclick={() => selectTab('habits')}
-            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === 'habits' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
+            onclick={() => selectTab(Tab.Habits)}
+            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Habits ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             Habits
           </button>
           <button
-            onclick={() => selectTab('dailies')}
-            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === 'dailies' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
+            onclick={() => selectTab(Tab.Dailies)}
+            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Dailies ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             Dailies
           </button>
           <button
-            onclick={() => selectTab('todos')}
-            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === 'todos' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
+            onclick={() => selectTab(Tab.Todos)}
+            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Todos ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             To-Dos
           </button>
           <button
-            onclick={() => selectTab('rewards')}
-            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === 'rewards' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
+            onclick={() => selectTab(Tab.Rewards)}
+            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Rewards ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             Rewards
           </button>
@@ -81,7 +82,7 @@
 
       <!-- Tab Content -->
       <div class="p-6">
-        {#if selectedTab === 'habits'}
+        {#if selectedTab === Tab.Habits}
           <!-- Habits Tab -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
@@ -154,7 +155,7 @@
               </div>
             </div>
           </div>
-        {:else if selectedTab === 'dailies'}
+        {:else if selectedTab === Tab.Dailies}
           <!-- Dailies Tab -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
@@ -206,7 +207,7 @@
               </div>
             </div>
           </div>
-        {:else if selectedTab === 'todos'}
+        {:else if selectedTab === Tab.Todos}
           <!-- To-Dos Tab -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
@@ -258,7 +259,7 @@
               </div>
             </div>
           </div>
-        {:else if selectedTab === 'rewards'}
+        {:else if selectedTab === Tab.Rewards}
           <!-- Rewards Tab -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
