@@ -3,6 +3,10 @@
   import { goto } from "$app/navigation";
   import Habitica from "$lib/habitica";
   import { Tab } from "./index";
+  import Habits from "./habits.svelte";
+  import Dailies from "./dailies.svelte";
+  import Todos from "./todos.svelte";
+  import Rewards from "./rewards.svelte";
 
   let selectedTab: Tab = $state(Tab.Habits);
 
@@ -83,225 +87,13 @@
       <!-- Tab Content -->
       <div class="p-6">
         {#if selectedTab === Tab.Habits}
-          <!-- Habits Tab -->
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">Habits</h2>
-              <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer">
-                + Add Habit
-              </button>
-            </div>
-
-            <!-- Habit Items -->
-            <div class="space-y-3">
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <div class="flex space-x-2 mr-4">
-                  <button class="w-8 h-8 bg-[#24cc8f] rounded-full flex items-center justify-center text-white hover:bg-[#1ca372] transition-colors cursor-pointer">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                  </button>
-                  <button class="w-8 h-8 bg-[#ff6165] rounded-full flex items-center justify-center text-white hover:bg-[#de3f3f] transition-colors cursor-pointer">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                  </button>
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Exercise for 30 minutes</h3>
-                  <p class="text-sm text-[#878190]">+2 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">+2</div>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <div class="flex space-x-2 mr-4">
-                  <button class="w-8 h-8 bg-[#24cc8f] rounded-full flex items-center justify-center text-white hover:bg-[#1ca372] transition-colors cursor-pointer">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                  </button>
-                  <button class="w-8 h-8 bg-[#ff6165] rounded-full flex items-center justify-center text-white hover:bg-[#de3f3f] transition-colors cursor-pointer">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                  </button>
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Read a book</h3>
-                  <p class="text-sm text-[#878190]">+1 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">+1</div>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <div class="flex space-x-2 mr-4">
-                  <button class="w-8 h-8 bg-[#24cc8f] rounded-full flex items-center justify-center text-white hover:bg-[#1ca372] transition-colors cursor-pointer">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                  </button>
-                  <button class="w-8 h-8 bg-[#ff6165] rounded-full flex items-center justify-center text-white hover:bg-[#de3f3f] transition-colors cursor-pointer">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                  </button>
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Drink 8 glasses of water</h3>
-                  <p class="text-sm text-[#878190]">+1 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">+3</div>
-              </div>
-            </div>
-          </div>
+          <Habits />
         {:else if selectedTab === Tab.Dailies}
-          <!-- Dailies Tab -->
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">Dailies</h2>
-              <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer">
-                + Add Daily
-              </button>
-            </div>
-
-            <!-- Daily Items -->
-            <div class="space-y-3">
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <button class="w-6 h-6 border-2 border-[#878190] rounded mr-4 hover:border-[#6133b4] transition-colors cursor-pointer">
-                  <svg class="h-4 w-4 text-[#878190] m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Morning meditation</h3>
-                  <p class="text-sm text-[#878190]">+2 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">Due today</div>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <button class="w-6 h-6 border-2 border-[#878190] rounded mr-4 hover:border-[#6133b4] transition-colors cursor-pointer">
-                  <svg class="h-4 w-4 text-[#878190] m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Walk 10,000 steps</h3>
-                  <p class="text-sm text-[#878190]">+3 XP, +2 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">Due today</div>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <button class="w-6 h-6 border-2 border-[#878190] rounded mr-4 hover:border-[#6133b4] transition-colors cursor-pointer">
-                  <svg class="h-4 w-4 text-[#878190] m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Practice guitar</h3>
-                  <p class="text-sm text-[#878190]">+2 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">Due today</div>
-              </div>
-            </div>
-          </div>
+          <Dailies />
         {:else if selectedTab === Tab.Todos}
-          <!-- To-Dos Tab -->
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">To-Dos</h2>
-              <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer">
-                + Add To-Do
-              </button>
-            </div>
-
-            <!-- To-Do Items -->
-            <div class="space-y-3">
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <button class="w-6 h-6 border-2 border-[#878190] rounded mr-4 hover:border-[#6133b4] transition-colors cursor-pointer">
-                  <svg class="h-4 w-4 text-[#878190] m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Finish project proposal</h3>
-                  <p class="text-sm text-[#878190]">+5 XP, +3 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">Due tomorrow</div>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <button class="w-6 h-6 border-2 border-[#878190] rounded mr-4 hover:border-[#6133b4] transition-colors cursor-pointer">
-                  <svg class="h-4 w-4 text-[#878190] m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Buy groceries</h3>
-                  <p class="text-sm text-[#878190]">+2 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">Due Friday</div>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <button class="w-6 h-6 border-2 border-[#878190] rounded mr-4 hover:border-[#6133b4] transition-colors cursor-pointer">
-                  <svg class="h-4 w-4 text-[#878190] m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </button>
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Call dentist for appointment</h3>
-                  <p class="text-sm text-[#878190]">+1 XP, +1 Gold</p>
-                </div>
-                <div class="text-sm text-[#878190]">Due next week</div>
-              </div>
-            </div>
-          </div>
+          <Todos />
         {:else if selectedTab === Tab.Rewards}
-          <!-- Rewards Tab -->
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">Rewards</h2>
-              <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer">
-                + Add Reward
-              </button>
-            </div>
-
-            <!-- Reward Items -->
-            <div class="space-y-3">
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Watch Netflix for 1 hour</h3>
-                  <p class="text-sm text-[#878190]">Cost: 5 Gold</p>
-                </div>
-                <button class="bg-[#4f2a93] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors cursor-pointer">
-                  Buy
-                </button>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Buy a new book</h3>
-                  <p class="text-sm text-[#878190]">Cost: 15 Gold</p>
-                </div>
-                <button class="bg-[#4f2a93] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors cursor-pointer">
-                  Buy
-                </button>
-              </div>
-
-              <div class="flex items-center p-4 bg-[#f9f9f9] rounded-lg">
-                <div class="flex-1">
-                  <h3 class="font-medium text-[#34313a]">Order takeout</h3>
-                  <p class="text-sm text-[#878190]">Cost: 10 Gold</p>
-                </div>
-                <button class="bg-[#4f2a93] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors cursor-pointer">
-                  Buy
-                </button>
-              </div>
-            </div>
-          </div>
+          <Rewards />
         {/if}
       </div>
     </div>
