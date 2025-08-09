@@ -1,14 +1,27 @@
 <script lang="ts">
+    import Habitica from "$lib/habitica";
+
     let userId = $state("");
     let apiToken = $state("");
     let isLoading = $state(false);
+    let isFailed = $state(false);
 
-    function handleLogin() {
+    async function handleLogin() {
       isLoading = true;
-      setTimeout(() => {
-        isLoading = false;
+      isFailed = false;
+
+      const habitica = new Habitica(userId, apiToken);
+      const profile = await habitica.call("https://habitica.com/api/v3/user");
+
+      if (profile.ok) {
+        Habitica.instance = habitica;
         window.location.href = "/";
-      }, 1500);
+      } else {
+        Habitica.instance = undefined;
+        isFailed = true;
+      }
+
+      isLoading = false;
     }
   </script>
 
@@ -34,7 +47,7 @@
               type="text"
               bind:value={userId}
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6133b4] focus:border-[#6133b4] transition-colors"
+              class="w-full px-4 py-3 border {isFailed ? 'border-red-500' : 'border-gray-300'} rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6133b4] focus:border-[#6133b4] transition-colors"
               placeholder="Enter your user ID"
             />
           </div>
@@ -48,7 +61,7 @@
               type="password"
               bind:value={apiToken}
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6133b4] focus:border-[#6133b4] transition-colors"
+              class="w-full px-4 py-3 border {isFailed ? 'border-red-500' : 'border-gray-300'} rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6133b4] focus:border-[#6133b4] transition-colors"
               placeholder="Enter your API token"
             />
           </div>
