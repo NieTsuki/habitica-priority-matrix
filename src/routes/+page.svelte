@@ -1,10 +1,5 @@
 <script lang="ts">
-  let isMenuOpen = false;
-  let selectedTab = 'habits';
-
-  function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
-  }
+  let selectedTab = $state("habits");
 
   function selectTab(tab: string) {
     selectedTab = tab;
@@ -16,173 +11,51 @@
   <div class="flex justify-between items-center h-16 px-4">
     <!-- Left side - Logo and Menu -->
     <div class="flex items-center space-x-4">
-      <div class="flex items-center space-x-2">
-        <div class="w-8 h-8 bg-[#ffa624] rounded-full flex items-center justify-center">
-          <span class="text-[#432874] font-bold text-lg">H</span>
-        </div>
-        <span class="text-xl font-bold font-['Roboto_Condensed']">Habitica</span>
-      </div>
+      <div class="flex items-center space-x-4">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="fill-white">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M31.62 28.86c-.32-.706-1.057-1.048-1.538-.706-.48.341-1.147.393-1.78.24-.633-.153-.753-1.604-.616-3.278.136-1.673.363-2.318.506-2.925.162-.61.877-.562.962-.084.086.479.582.479 1.307-.391.724-.87.617-3.409-.218-5.474-.836-2.065.326-1.865.664-1.66.337.205.544-.102.462-1.28-.082-1.178-1.166-2.098-2.039-2.663-.873-.564-1.936-1.186-1.911-2.697.025-1.511 2.08-1.464 2.358-1.439.279.025.815-.093.506-1.663-.31-1.57-1.43-1.869-2.133-1.826-.703.042-1.177.428-2.17.053-.995-.376-1.655-.23-2.58-.023-.926.206-2.138.776-3.646 1.183-.795.219-1.064.274-1.93.288-.532.008-.755.653-.043 1.444.563.643 1.839.814 2.606.707.494-.07.608.258.563.74a8.013 8.013 0 0 0-.01 1.795c.08.6.18 1.62-.103 2.286-.14.326-.545.677-.98.653-.565-.034-1.022-.7-1.414-1.49-.825-1.662-1.793-2.014-5.404-3.535-3.248-1.367-5.007-3.5-6.096-4.874-.969-1.217-1.939-.756-1.85.342.07.852.592 3.604 1.912 5.257 1.623 2.525 4.128 3.67 7.013 3.895.755.06 1.226.208 1.29.553.095.735-.622 1.244-1.959 1.09-1.336-.157-1.907.087-1.641.848.85 1.79 2.809 1.869 3.623 1.942.275.05 1.246 0 1.764.143.605.166.735 1.005-.14 1.459-1.558.76-2.237 1.391-3.025 2.83-.595 1.13-1.108 3.022-.574 5.745.513 2.648-3.337 2.733-5 2.357-.716-.151-1.47-1.512.287-2.65 1.421-.922 1.708-1.49 1.645-2.657-.074-1.36-.824-1.458-.822-2.64v-2.82a.435.435 0 0 0-.435-.435H7.698a.435.435 0 0 1-.435-.434v-1.7a.435.435 0 0 0-.435-.435H5.501a.435.435 0 0 1-.435-.435v-1.524a.435.435 0 0 0-.435-.435H3.015a.435.435 0 0 1-.435-.435v-1.603a.435.435 0 0 0-.435-.434H.435a.435.435 0 0 0-.435.434v1.705c0 .24.195.435.435.435h1.62c.24 0 .435.195.435.435v6.076c0 .241.195.435.435.435h1.71c.241 0 .436.196.436.435v1.988c0 .24.195.434.435.434h2.402c.734-.052.862.934.854 1.286-.016.803-.923 1.06-1.352 1.395-1.145.884-2.031 1.783-1.513 3.512l.013.036c.945 2.007 3.542 1.8 5.183 1.8h10.326c.584 0 1.184.135 1.046-.545-.136-.68-.425-1.61-1.265-1.61-.84 0-.703.467-1.524.228-.821-.238-.822-1.348.411-3.279 1.276-1.649 3.46-1.524 4.781-.358 1.32 1.166.93 3.191.653 4.354-.158.82.218 1.224.669 1.213h5.242c.806-.014.647-.556.185-1.614h.003z"></path>
+        </svg>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-4 ml-8">
-        <a href="#" class="text-white hover:text-[#ffa624] px-3 py-2 rounded-md text-sm font-medium">Tasks</a>
-        <a href="#" class="text-[#878190] hover:text-[#ffa624] px-3 py-2 rounded-md text-sm font-medium">Party</a>
-        <a href="#" class="text-[#878190] hover:text-[#ffa624] px-3 py-2 rounded-md text-sm font-medium">Guilds</a>
-        <a href="#" class="text-[#878190] hover:text-[#ffa624] px-3 py-2 rounded-md text-sm font-medium">Market</a>
+        <a href="https://habitica.com/" class="text-xl font-bold font-['Roboto_Condensed']">Go to Habitica</a>
       </div>
     </div>
 
     <!-- Right side - User info and notifications -->
     <div class="flex items-center space-x-4">
-      <!-- Notifications -->
-      <button class="text-white hover:text-[#ffa624] p-2">
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-6H4v6zM4 5h6v6H4V5zM14 5h6v6h-6V5z"/>
-        </svg>
-      </button>
-
-      <!-- User Avatar -->
-      <div class="flex items-center space-x-2">
-        <div class="w-8 h-8 bg-[#ffa624] rounded-full flex items-center justify-center">
-          <span class="text-[#432874] font-bold text-sm">W</span>
-        </div>
-        <span class="text-sm font-medium">Warrior</span>
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
+      <button class="text-white p-2 cursor-pointer text-sm">Log Out</button>
     </div>
   </div>
 </nav>
 
 <!-- Main Layout -->
 <div class="flex h-screen bg-[#f9f9f9]">
-  <!-- Sidebar -->
-  <div class="w-64 bg-[#edecee] p-6 hidden md:block">
-    <div class="space-y-6">
-      <!-- Character Stats -->
-      <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h3 class="text-lg font-bold text-[#34313a] mb-4 font-['Roboto_Condensed']">Character Stats</h3>
-
-        <!-- Health Bar -->
-        <div class="mb-3">
-          <div class="flex justify-between text-sm mb-1">
-            <span class="text-[#4e4a57]">Health</span>
-            <span class="text-[#4e4a57]">45/50</span>
-          </div>
-          <div class="w-full bg-[#edecee] rounded-full h-2">
-            <div class="bg-[#f74e52] h-2 rounded-full" style="width: 90%"></div>
-          </div>
-        </div>
-
-        <!-- Experience Bar -->
-        <div class="mb-3">
-          <div class="flex justify-between text-sm mb-1">
-            <span class="text-[#4e4a57]">Experience</span>
-            <span class="text-[#4e4a57]">1,245/1,500</span>
-          </div>
-          <div class="w-full bg-[#edecee] rounded-full h-2">
-            <div class="bg-[#ffbe5d] h-2 rounded-full" style="width: 83%"></div>
-          </div>
-        </div>
-
-        <!-- Mana Bar -->
-        <div class="mb-3">
-          <div class="flex justify-between text-sm mb-1">
-            <span class="text-[#4e4a57]">Mana</span>
-            <span class="text-[#4e4a57]">35/35</span>
-          </div>
-          <div class="w-full bg-[#edecee] rounded-full h-2">
-            <div class="bg-[#50b5e9] h-2 rounded-full" style="width: 100%"></div>
-          </div>
-        </div>
-
-        <!-- Level -->
-        <div class="text-center mt-4">
-          <div class="text-2xl font-bold text-[#34313a]">Level 15</div>
-          <div class="text-sm text-[#878190]">Warrior</div>
-        </div>
-      </div>
-
-      <!-- Navigation Menu -->
-      <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h3 class="text-lg font-bold text-[#34313a] mb-4 font-['Roboto_Condensed']">Tasks</h3>
-        <div class="space-y-2">
-          <button
-            on:click={() => selectTab('habits')}
-            class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors {selectedTab === 'habits' ? 'bg-[#d5c8ff] text-[#6133b4]' : 'text-[#4e4a57] hover:bg-[#edecee]'}"
-          >
-            Habits
-          </button>
-          <button
-            on:click={() => selectTab('dailies')}
-            class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors {selectedTab === 'dailies' ? 'bg-[#d5c8ff] text-[#6133b4]' : 'text-[#4e4a57] hover:bg-[#edecee]'}"
-          >
-            Dailies
-          </button>
-          <button
-            on:click={() => selectTab('todos')}
-            class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors {selectedTab === 'todos' ? 'bg-[#d5c8ff] text-[#6133b4]' : 'text-[#4e4a57] hover:bg-[#edecee]'}"
-          >
-            To-Dos
-          </button>
-          <button
-            on:click={() => selectTab('rewards')}
-            class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors {selectedTab === 'rewards' ? 'bg-[#d5c8ff] text-[#6133b4]' : 'text-[#4e4a57] hover:bg-[#edecee]'}"
-          >
-            Rewards
-          </button>
-        </div>
-      </div>
-
-      <!-- Party Info -->
-      <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h3 class="text-lg font-bold text-[#34313a] mb-4 font-['Roboto_Condensed']">Party</h3>
-        <div class="text-sm text-[#4e4a57] mb-2">Quest Progress</div>
-        <div class="w-full bg-[#edecee] rounded-full h-2 mb-2">
-          <div class="bg-[#24cc8f] h-2 rounded-full" style="width: 65%"></div>
-        </div>
-        <div class="text-xs text-[#878190]">65% Complete</div>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Content Area -->
-  <div class="flex-1 p-6">
-    <!-- Mobile Menu Button -->
-    <div class="md:hidden mb-4">
-      <button on:click={toggleMenu} class="text-[#4e4a57] hover:text-[#6133b4]">
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
-    </div>
-
+  <div class="flex-1">
     <!-- Task Management Interface -->
-    <div class="bg-white rounded-lg shadow-sm">
+    <div>
       <!-- Tab Headers -->
       <div class="border-b border-[#edecee]">
         <div class="flex">
           <button
-            on:click={() => selectTab('habits')}
+            onclick={() => selectTab('habits')}
             class="px-6 py-4 text-sm font-medium transition-colors {selectedTab === 'habits' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             Habits
           </button>
           <button
-            on:click={() => selectTab('dailies')}
+            onclick={() => selectTab('dailies')}
             class="px-6 py-4 text-sm font-medium transition-colors {selectedTab === 'dailies' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             Dailies
           </button>
           <button
-            on:click={() => selectTab('todos')}
+            onclick={() => selectTab('todos')}
             class="px-6 py-4 text-sm font-medium transition-colors {selectedTab === 'todos' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             To-Dos
           </button>
           <button
-            on:click={() => selectTab('rewards')}
+            onclick={() => selectTab('rewards')}
             class="px-6 py-4 text-sm font-medium transition-colors {selectedTab === 'rewards' ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
             Rewards
@@ -386,7 +259,7 @@
                   <h3 class="font-medium text-[#34313a]">Watch Netflix for 1 hour</h3>
                   <p class="text-sm text-[#878190]">Cost: 5 Gold</p>
                 </div>
-                <button class="bg-[#ffa624] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors">
+                <button class="bg-[#4f2a93] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors">
                   Buy
                 </button>
               </div>
@@ -396,7 +269,7 @@
                   <h3 class="font-medium text-[#34313a]">Buy a new book</h3>
                   <p class="text-sm text-[#878190]">Cost: 15 Gold</p>
                 </div>
-                <button class="bg-[#ffa624] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors">
+                <button class="bg-[#4f2a93] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors">
                   Buy
                 </button>
               </div>
@@ -406,7 +279,7 @@
                   <h3 class="font-medium text-[#34313a]">Order takeout</h3>
                   <p class="text-sm text-[#878190]">Cost: 10 Gold</p>
                 </div>
-                <button class="bg-[#ffa624] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors">
+                <button class="bg-[#4f2a93] text-[#432874] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#ffbe5d] transition-colors">
                   Buy
                 </button>
               </div>
