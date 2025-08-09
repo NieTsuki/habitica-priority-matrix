@@ -27,6 +27,7 @@ export default class Habitica {
 
     constructor(apiUser: string, apiKey: string) {
         this.headers = {
+            "Content-Type": "application/json",
             "X-Client": "d94d6f6c-2be5-46a4-ba68-e081d9462d87-habitica-priority-matrix",
             "x-api-user": apiUser,
             "x-api-key": apiKey,
