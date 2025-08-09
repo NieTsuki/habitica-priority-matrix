@@ -1,6 +1,29 @@
 export default class Habitica {
-    static instance?: Habitica;
+    private static _instance?: Habitica;
     headers: { [key: string]: string };
+
+    static get instance() {
+        if (!this._instance) {
+            const auth = localStorage.getItem("auth-persistence");
+
+            if (auth) {
+                const [apiUser, apiKey] = auth.split(":");
+                this._instance = new Habitica(apiUser, apiKey);
+            }
+        }
+
+        return this._instance;
+    }
+
+    static set instance(value: Habitica | undefined) {
+        this._instance = value;
+
+        if (value) {
+            localStorage.setItem("auth-persistence", `${value.headers["x-api-user"]}:${value.headers["x-api-key"]}`);
+        } else {
+            localStorage.removeItem("auth-persistence");
+        }
+    }
 
     constructor(apiUser: string, apiKey: string) {
         this.headers = {
