@@ -32,7 +32,13 @@
 
     <!-- Right side - User info and notifications -->
     <div class="flex items-center space-x-4">
-      <button class="text-white p-2 cursor-pointer text-sm">Log Out</button>
+      <button
+        class="text-white p-2 cursor-pointer text-sm"
+        onclick={() => {
+          Habitica.instance = undefined;
+          goto("/login");
+        }}
+      >Log Out</button>
     </div>
   </div>
 </nav>
