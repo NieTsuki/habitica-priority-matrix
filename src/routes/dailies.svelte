@@ -6,6 +6,11 @@
     let loading = $state(true);
     let showModal = $state(false);
 
+    // Filter out completed dailies
+    let incompleteDailies = $derived(Object.fromEntries(
+        Object.entries(dailies).filter(([, task]) => !task.completed)
+    ));
+
     onMount(async () => {
         await loadDailies();
     });
@@ -48,10 +53,10 @@
             <div class="flex justify-center py-8">
                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#6133b4]"></div>
             </div>
-        {:else if Object.keys(dailies).length === 0}
+        {:else if Object.keys(incompleteDailies).length === 0}
             <div class="text-center py-8 text-[#878190]">No dailies found</div>
         {:else}
-            <PriorityMatrix tasks={dailies} />
+            <PriorityMatrix tasks={incompleteDailies} />
         {/if}
     </div>
 </div>
