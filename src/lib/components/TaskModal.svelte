@@ -22,6 +22,10 @@
     let taskImportant = $state(false);
     let isCreating = $state(false);
 
+    // Drag and drop state
+    let draggedItem = $state<number | null>(null);
+    let draggedOverIndex = $state<number | null>(null);
+
     function resetForm() {
         currentStep = 1;
         taskTitle = "";
@@ -31,6 +35,8 @@
         taskDueDate = "";
         taskImportant = false;
         isCreating = false;
+        draggedItem = null;
+        draggedOverIndex = null;
     }
 
     function closeModal() {
@@ -71,6 +77,42 @@
     function updateChecklistItem(index: number, text: string) {
         taskChecklist[index].text = text;
         taskChecklist = [...taskChecklist];
+    }
+
+    // Drag and drop functions
+    function handleDragStart(e: DragEvent, index: number) {
+        draggedItem = index;
+        if (e.dataTransfer) {
+            e.dataTransfer.effectAllowed = 'move';
+        }
+    }
+
+    function handleDragOver(e: DragEvent, index: number) {
+        e.preventDefault();
+        if (draggedItem !== null && draggedItem !== index) {
+            draggedOverIndex = index;
+        }
+    }
+
+    function handleDragLeave() {
+        draggedOverIndex = null;
+    }
+
+    function handleDrop(e: DragEvent, dropIndex: number) {
+        e.preventDefault();
+        if (draggedItem !== null && draggedItem !== dropIndex) {
+            const newChecklist = [...taskChecklist];
+            const [draggedItemData] = newChecklist.splice(draggedItem, 1);
+            newChecklist.splice(dropIndex, 0, draggedItemData);
+            taskChecklist = newChecklist;
+        }
+        draggedItem = null;
+        draggedOverIndex = null;
+    }
+
+    function handleDragEnd() {
+        draggedItem = null;
+        draggedOverIndex = null;
     }
 
     async function createTask() {
@@ -118,8 +160,8 @@
 </script>
 
 {#if showModal}
-    <div class="modal-overlay" on:click={closeModal}>
-        <div class="modal-content" on:click|stopPropagation>
+    <div class="modal-overlay">
+        <div class="modal-content">
             <div class="step-indicator">
                 <div class="step {currentStep >= 1 ? 'active' : 'inactive'}">1</div>
                 <div class="step {currentStep >= 2 ? 'active' : 'inactive'}">2</div>
@@ -155,7 +197,15 @@
                     <label class="form-label">What checklist items do you need?</label>
                     <div class="checklist-container">
                         {#each taskChecklist as item, index (index)}
-                            <div class="checklist-item">
+                            <div
+                                class="checklist-item {draggedOverIndex === index ? 'drag-over' : ''} {draggedItem === index ? 'dragging' : ''}"
+                                draggable="true"
+                                on:dragstart={(e) => handleDragStart(e, index)}
+                                on:dragover={(e) => handleDragOver(e, index)}
+                                on:dragleave={handleDragLeave}
+                                on:drop={(e) => handleDrop(e, index)}
+                                on:dragend={handleDragEnd}
+                            >
                                 <div class="drag-handle">
                                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                                         <circle cx="8" cy="8" r="1.5"/>
@@ -223,11 +273,28 @@
             {:else if currentStep === 6}
                 <div class="form-group">
                     <label class="form-label">Is this task important?</label>
-                    <input
-                        type="checkbox"
-                        bind:checked={taskImportant}
-                        class="form-input"
-                    />
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input
+                                type="radio"
+                                name="important"
+                                value={true}
+                                bind:group={taskImportant}
+                                class="radio-input"
+                            />
+                            <span class="radio-label">Yes</span>
+                        </label>
+                        <label class="radio-option">
+                            <input
+                                type="radio"
+                                name="important"
+                                value={false}
+                                bind:group={taskImportant}
+                                class="radio-input"
+                            />
+                            <span class="radio-label">No</span>
+                        </label>
+                    </div>
                 </div>
             {/if}
 
@@ -472,6 +539,16 @@
         background-color: #f9fafb;
     }
 
+    .checklist-item.dragging {
+        opacity: 0.5;
+        background-color: #f3f4f6;
+    }
+
+    .checklist-item.drag-over {
+        background-color: #e0e7ff;
+        border-left: 3px solid #6133b4;
+    }
+
     .drag-handle {
         display: flex;
         align-items: center;
@@ -487,6 +564,10 @@
 
     .drag-handle:hover {
         opacity: 1;
+    }
+
+    .drag-handle:active {
+        cursor: grabbing;
     }
 
     .checkbox-wrapper {
@@ -579,5 +660,64 @@
 
     .add-item-btn:hover svg {
         color: #6133b4;
+    }
+
+    .radio-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+    }
+
+    .radio-option:hover {
+        background-color: #f9fafb;
+    }
+
+    .radio-input {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #d1d5db;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s;
+        appearance: none;
+        position: relative;
+    }
+
+    .radio-input:checked {
+        border-color: #6133b4;
+        background-color: #6133b4;
+    }
+
+    .radio-input:checked::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        background-color: white;
+        border-radius: 50%;
+    }
+
+    .radio-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(97, 51, 180, 0.1);
+    }
+
+    .radio-label {
+        font-size: 0.875rem;
+        color: #374151;
+        font-weight: 500;
     }
 </style>
