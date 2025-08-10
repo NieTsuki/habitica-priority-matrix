@@ -7,10 +7,15 @@
     let showModal = $state(false);
 
     onMount(async () => {
+        await loadDailies();
+    });
+
+    async function loadDailies() {
+        loading = true;
         const taskService = TaskService.getInstance();
         dailies = await taskService.fetchTasks("dailys");
         loading = false;
-    });
+    }
 
     function openModal() {
         showModal = true;
@@ -28,9 +33,14 @@
 <div class="space-y-4">
     <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">Dailies</h2>
-        <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" on:click={openModal}>
-            + Add Daily
-        </button>
+        <div class="flex gap-2">
+            <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" on:click={loadDailies}>
+                ↻ Reload
+            </button>
+            <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" on:click={openModal}>
+                + Add Daily
+            </button>
+        </div>
     </div>
 
     <div class="space-y-3">
