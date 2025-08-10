@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import { resolve } from "$app/paths";
     import Habitica from "$lib/services/habitica";
 
     let userId = $state("");
@@ -16,7 +17,7 @@
 
       if (profile.ok) {
         Habitica.instance = habitica;
-        goto("/");
+        goto(resolve("/"));
       } else {
         Habitica.instance = undefined;
         isFailed = true;

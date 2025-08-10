@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import { resolve } from "$app/paths";
   import Habitica from "$lib/services/habitica";
   import { Tab } from "./index";
   import Dailies from "./dailies.svelte";
@@ -16,7 +17,7 @@
 
   onMount(() => {
     if (!Habitica.instance) {
-      goto("/login");
+      goto(resolve("/login"));
       return;
     }
 
@@ -48,7 +49,7 @@
         class="text-white p-2 cursor-pointer text-sm"
         onclick={() => {
           Habitica.instance = undefined;
-          goto("/login");
+          goto(resolve("/login"));
         }}
       >Log Out</button>
     </div>
