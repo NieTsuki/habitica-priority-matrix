@@ -99,7 +99,7 @@
 </script>
 
 <div class="space-y-4">
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-red-100 border-2 border-red-300 rounded-lg p-3 min-h-[80px]">
             <div class="text-center mb-2">
                 <div class="text-xs font-medium text-red-700">Urgent</div>
