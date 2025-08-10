@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { formatDueDate } from "./utils";
-    import { type Task } from "./index";
+    import { type Task } from "$lib";
+    import { formatDueDate } from "$lib/utils";
 
     const { task } = $props<{ task: Task }>();
 </script>

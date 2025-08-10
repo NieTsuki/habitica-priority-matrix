@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import Habitica from "$lib/habitica";
+    import Habitica from "$lib/services/habitica";
 
     let userId = $state("");
     let apiToken = $state("");

@@ -1,5 +1,5 @@
 import Habitica from "./habitica";
-import { type Task, type CreateTaskData } from "./task";
+import { type Task, type CreateTaskData } from "../task";
 import { TagService } from "./tagService";
 
 export class TaskService {

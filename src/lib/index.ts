@@ -1,5 +1,5 @@
 export { type Task, type ChecklistItem, type Group, type CreateTaskData, type TaskType } from "./task";
-export { TaskService } from "./taskService";
-export { TagService, type Tag } from "./tagService";
-export { default as TaskModal } from "./TaskModal.svelte";
-export { default as PriorityMatrix } from "./PriorityMatrix.svelte";
+export { TaskService } from "./services/taskService";
+export { TagService, type Tag } from "./services/tagService";
+export { default as TaskModal } from "./components/TaskModal.svelte";
+export { default as PriorityMatrix } from "./components/PriorityMatrix.svelte";

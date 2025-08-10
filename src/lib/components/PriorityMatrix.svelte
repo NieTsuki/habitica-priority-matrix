@@ -1,7 +1,7 @@
 <script lang="ts">
     import { type Task } from "$lib";
     import TaskItem from "./TaskItem.svelte";
-    import { TagService } from "./tagService";
+    import { TagService } from "$lib/services/tagService";
     import { onMount } from "svelte";
 
     interface Props {

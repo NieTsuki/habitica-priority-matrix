@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type CreateTaskData, TaskService } from "./index";
+    import { type Task, type CreateTaskData, TaskService } from "$lib";
 
         const {
         showModal = false,
@@ -10,7 +10,7 @@
         showModal: boolean;
         taskType: "todo" | "daily";
         onClose: () => void;
-        onTaskCreated: (task: import("./task").Task) => void;
+        onTaskCreated: (task: Task) => void;
     }>();
 
     let currentStep = $state(1);

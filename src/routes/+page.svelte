@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import Habitica from "$lib/habitica";
+  import Habitica from "$lib/services/habitica";
   import { Tab } from "./index";
   import Habits from "./habits.svelte";
   import Dailies from "./dailies.svelte";
