@@ -3,12 +3,10 @@
   import { goto } from "$app/navigation";
   import Habitica from "$lib/services/habitica";
   import { Tab } from "./index";
-  import Habits from "./habits.svelte";
   import Dailies from "./dailies.svelte";
   import Todos from "./todos.svelte";
-  import Rewards from "./rewards.svelte";
 
-  let selectedTab: Tab = $state(Tab.Habits);
+  let selectedTab: Tab = $state(Tab.Dailies);
 
   function selectTab(tab: Tab) {
     selectedTab = tab;
@@ -66,12 +64,6 @@
       <div class="border-b border-[#edecee]">
         <div class="flex">
           <button
-            onclick={() => selectTab(Tab.Habits)}
-            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Habits ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
-          >
-            Habits
-          </button>
-          <button
             onclick={() => selectTab(Tab.Dailies)}
             class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Dailies ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
           >
@@ -83,25 +75,15 @@
           >
             To-Dos
           </button>
-          <button
-            onclick={() => selectTab(Tab.Rewards)}
-            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Rewards ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
-          >
-            Rewards
-          </button>
         </div>
       </div>
 
       <!-- Tab Content -->
       <div class="p-6">
-        {#if selectedTab === Tab.Habits}
-          <Habits />
-        {:else if selectedTab === Tab.Dailies}
+        {#if selectedTab === Tab.Dailies}
           <Dailies />
         {:else if selectedTab === Tab.Todos}
           <Todos />
-        {:else if selectedTab === Tab.Rewards}
-          <Rewards />
         {/if}
       </div>
     </div>
