@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { type Task, TaskService, TaskItem, TaskModal } from "$lib";
+    import { type Task, TaskService, TaskModal, PriorityMatrix } from "$lib";
 
     let todos: { [key: string]: Task } = $state({});
     let loading = $state(true);
@@ -23,19 +23,12 @@
     function handleTaskCreated(newTask: Task) {
         todos[newTask.id] = newTask;
     }
-
-    function handleTaskCompleted(taskId: string) {
-        if (todos[taskId]) {
-            todos[taskId].completed = true;
-            todos = { ...todos };
-        }
-    }
 </script>
 
 <div class="space-y-4">
     <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">To-Dos</h2>
-        <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" onclick={openModal}>
+        <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" on:click={openModal}>
             + Add To-Do
         </button>
     </div>
@@ -48,9 +41,7 @@
         {:else if Object.keys(todos).length === 0}
             <div class="text-center py-8 text-[#878190]">No todos found</div>
         {:else}
-            {#each Object.values(todos) as todo (todo.id)}
-                <TaskItem task={todo} onComplete={handleTaskCompleted} />
-            {/each}
+            <PriorityMatrix tasks={todos} />
         {/if}
     </div>
 </div>

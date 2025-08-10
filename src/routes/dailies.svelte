@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { type Task, TaskService, TaskItem, TaskModal } from "$lib";
+    import { type Task, TaskService, TaskModal, PriorityMatrix } from "$lib";
 
     let dailies: { [key: string]: Task } = $state({});
     let loading = $state(true);
@@ -8,7 +8,7 @@
 
     onMount(async () => {
         const taskService = TaskService.getInstance();
-        dailies = await taskService.fetchTasks("dailies");
+        dailies = await taskService.fetchTasks("dailys");
         loading = false;
     });
 
@@ -22,13 +22,6 @@
 
     function handleTaskCreated(newTask: Task) {
         dailies[newTask.id] = newTask;
-    }
-
-    function handleTaskCompleted(taskId: string) {
-        if (dailies[taskId]) {
-            dailies[taskId].completed = true;
-            dailies = { ...dailies };
-        }
     }
 </script>
 
@@ -48,9 +41,7 @@
         {:else if Object.keys(dailies).length === 0}
             <div class="text-center py-8 text-[#878190]">No dailies found</div>
         {:else}
-            {#each Object.values(dailies) as daily (daily.id)}
-                <TaskItem task={daily} onComplete={handleTaskCompleted} />
-            {/each}
+            <PriorityMatrix tasks={dailies} />
         {/if}
     </div>
 </div>
