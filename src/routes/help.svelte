@@ -16,7 +16,7 @@
 
     <!-- Matrix Explained -->
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Matrix Quadrants</h2>
+      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Matrix quadrants</h2>
       <div class="grid grid-cols-2 gap-3">
         <div class="bg-red-100 border-l-4 border-red-500 p-3 rounded">
           <h4 class="font-semibold text-red-800 text-sm">Urgent + Important</h4>
@@ -39,16 +39,27 @@
 
     <!-- Urgency -->
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Urgency = Due Date</h2>
+      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Tasks marked as urgent</h2>
       <div class="bg-[#f8f7fa] rounded-lg p-4">
-        <p class="text-[#4e4a57] mb-2"><strong>Simple rule:</strong> Tasks due before/on the average due date = urgent</p>
-        <p class="text-[#4e4a57] text-sm">Example: If average is Jan 15, tasks due Jan 1-15 are urgent, Jan 16+ are not</p>
+        <p class="text-[#4e4a57] mb-3"><strong>How it works:</strong> The app calculates the average due date of all your tasks, then splits them into urgent (before/on average) and not urgent (after average).</p>
+
+        <div class="bg-white rounded p-3 mb-3">
+          <h4 class="font-semibold text-[#432874] mb-2">Example:</h4>
+          <p class="text-[#4e4a57] text-sm">If you have tasks due Jan 10, Jan 15, Jan 20, and Jan 25:</p>
+          <ul class="text-[#4e4a57] text-sm mt-2 space-y-1">
+            <li>• Average due date: Jan 17.5</li>
+            <li>• <strong>Urgent:</strong> Jan 10, Jan 15 (before/on average)</li>
+            <li>• <strong>Not Urgent:</strong> Jan 20, Jan 25 (after average)</li>
+          </ul>
+        </div>
+
+        <p class="text-[#4e4a57] text-sm"><strong>Note:</strong> Tasks without due dates are never considered urgent.</p>
       </div>
     </section>
 
     <!-- Mark Important -->
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Mark Tasks Important</h2>
+      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Tasks marked as important</h2>
       <div class="space-y-3">
         <div class="bg-[#f8f7fa] rounded-lg p-4">
           <h4 class="font-semibold text-[#432874] mb-2">In Habitica:</h4>
@@ -63,13 +74,13 @@
 
     <!-- Contact -->
     <section>
-      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Need Help?</h2>
+      <h2 class="text-2xl font-semibold text-[#6133b4] mb-3">Need help?</h2>
       <div class="bg-[#f8f7fa] rounded-lg p-4">
         <p class="text-[#4e4a57] text-sm mb-2">
           Message me on Habitica: <span class="font-mono text-[#6133b4]">@nie0x6708</span>
         </p>
         <p class="text-[#4e4a57] text-sm">
-          Report bugs on <a href="https://github.com/NieTsuki/habitica-priority-matrix/issues" class="text-[#6133b4] hover:underline">GitHub</a>
+          Report bugs on <a href="https://github.com/NieTsuki/habitica-priority-matrix/issues" class="text-[#6133b4] hover:underline" target="_blank">GitHub</a>
         </p>
       </div>
     </section>
