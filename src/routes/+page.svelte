@@ -12,11 +12,19 @@
 
   function selectTab(tab: Tab) {
     selectedTab = tab;
+    localStorage.setItem('selectedTab', tab);
   }
 
   onMount(() => {
     if (!Habitica.instance) {
       goto("/login");
+      return;
+    }
+
+    // Restore selected tab from localStorage
+    const savedTab = localStorage.getItem('selectedTab');
+    if (savedTab && Object.values(Tab).includes(savedTab as Tab)) {
+      selectedTab = savedTab as Tab;
     }
   });
 </script>
