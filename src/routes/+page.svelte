@@ -5,6 +5,7 @@
   import { Tab } from "./index";
   import Dailies from "./dailies.svelte";
   import Todos from "./todos.svelte";
+  import Help from "./help.svelte";
 
   let selectedTab: Tab = $state(Tab.Dailies);
 
@@ -75,6 +76,12 @@
           >
             To-Dos
           </button>
+          <button
+            onclick={() => selectTab(Tab.Help)}
+            class="px-6 py-4 text-sm font-medium transition-colors cursor-pointer {selectedTab === Tab.Help ? 'text-[#6133b4] border-b-2 border-[#6133b4]' : 'text-[#4e4a57] hover:text-[#6133b4]'}"
+          >
+            Help
+          </button>
         </div>
       </div>
 
@@ -84,6 +91,8 @@
           <Dailies />
         {:else if selectedTab === Tab.Todos}
           <Todos />
+        {:else if selectedTab === Tab.Help}
+          <Help />
         {/if}
       </div>
     </div>
