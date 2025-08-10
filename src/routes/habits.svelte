@@ -72,9 +72,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .habits-container {
-        padding: 1rem;
-    }
-</style>

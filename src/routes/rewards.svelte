@@ -42,9 +42,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .rewards-container {
-        padding: 1rem;
-    }
-</style>
