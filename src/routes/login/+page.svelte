@@ -39,7 +39,7 @@
       </div>
 
       <div class="bg-white rounded-lg shadow-xl p-8 border border-gray-200">
-        <form on:submit|preventDefault={handleLogin} class="space-y-6">
+        <form onsubmit={(e) => { e.preventDefault(); handleLogin(); }} class="space-y-6">
           <div>
             <label for="userId" class="block text-sm font-medium text-gray-700 mb-2">
               User ID

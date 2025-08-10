@@ -194,17 +194,18 @@
                 </div>
             {:else if currentStep === 3}
                 <div class="form-group">
-                    <label class="form-label">What checklist items do you need?</label>
-                    <div class="checklist-container">
+                    <label class="form-label" for="checklist-container">What checklist items do you need?</label>
+                    <div class="checklist-container" id="checklist-container" role="list">
                         {#each taskChecklist as item, index (index)}
                             <div
                                 class="checklist-item {draggedOverIndex === index ? 'drag-over' : ''} {draggedItem === index ? 'dragging' : ''}"
                                 draggable="true"
-                                on:dragstart={(e) => handleDragStart(e, index)}
-                                on:dragover={(e) => handleDragOver(e, index)}
-                                on:dragleave={handleDragLeave}
-                                on:drop={(e) => handleDrop(e, index)}
-                                on:dragend={handleDragEnd}
+                                role="listitem"
+                                ondragstart={(e) => handleDragStart(e, index)}
+                                ondragover={(e) => handleDragOver(e, index)}
+                                ondragleave={handleDragLeave}
+                                ondrop={(e) => handleDrop(e, index)}
+                                ondragend={handleDragEnd}
                             >
                                 <div class="drag-handle">
                                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -228,13 +229,14 @@
                                     class="checklist-input"
                                     placeholder="Enter checklist item..."
                                     bind:value={item.text}
-                                    on:input={(e) => updateChecklistItem(index, (e.target as HTMLInputElement).value)}
+                                    oninput={(e) => updateChecklistItem(index, (e.target as HTMLInputElement).value)}
                                 />
                                 {#if taskChecklist.length > 1}
                                     <button
                                         class="remove-item-btn"
-                                        on:click={() => removeChecklistItem(index)}
+                                        onclick={() => removeChecklistItem(index)}
                                         title="Remove item"
+                                        aria-label="Remove checklist item"
                                     >
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -243,7 +245,7 @@
                                 {/if}
                             </div>
                         {/each}
-                        <button class="add-item-btn" on:click={addChecklistItem}>
+                        <button class="add-item-btn" onclick={addChecklistItem}>
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                             </svg>
@@ -253,8 +255,8 @@
                 </div>
             {:else if currentStep === 4}
                 <div class="form-group">
-                    <label class="form-label">How difficult is this task?</label>
-                    <select class="form-input" bind:value={taskDifficulty}>
+                    <label class="form-label" for="task-difficulty">How difficult is this task?</label>
+                    <select id="task-difficulty" class="form-input" bind:value={taskDifficulty}>
                         <option value="0.1">Trivial</option>
                         <option value="1">Easy</option>
                         <option value="1.5">Medium</option>
@@ -263,8 +265,9 @@
                 </div>
             {:else if currentStep === 5}
                 <div class="form-group">
-                    <label class="form-label">When is this task due?</label>
+                    <label class="form-label" for="task-due-date">When is this task due?</label>
                     <input
+                        id="task-due-date"
                         type="date"
                         class="form-input"
                         bind:value={taskDueDate}
@@ -272,7 +275,7 @@
                 </div>
             {:else if currentStep === 6}
                 <div class="form-group">
-                    <label class="form-label">Is this task important?</label>
+                    <label class="form-label" for="task-important">Is this task important?</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input
@@ -300,67 +303,67 @@
 
             <div class="button-group">
                 {#if currentStep === 1}
-                    <button class="btn btn-secondary" on:click={closeModal}>Cancel</button>
+                    <button class="btn btn-secondary" onclick={closeModal}>Cancel</button>
                     <button
                         class="btn btn-primary"
-                        on:click={nextStep}
+                        onclick={nextStep}
                         disabled={!taskTitle.trim()}
                     >
                         Next
                     </button>
                 {:else if currentStep === 2}
                     <div class="flex gap-2">
-                        <button class="btn btn-secondary" on:click={closeModal}>Cancel</button>
-                        <button class="btn btn-secondary" on:click={previousStep}>Back</button>
+                        <button class="btn btn-secondary" onclick={closeModal}>Cancel</button>
+                        <button class="btn btn-secondary" onclick={previousStep}>Back</button>
                     </div>
                     <button
                         class="btn btn-primary"
-                        on:click={nextStep}
+                        onclick={nextStep}
                     >
                         Next
                     </button>
                 {:else if currentStep === 3}
                     <div class="flex gap-2">
-                        <button class="btn btn-secondary" on:click={closeModal}>Cancel</button>
-                        <button class="btn btn-secondary" on:click={previousStep}>Back</button>
+                        <button class="btn btn-secondary" onclick={closeModal}>Cancel</button>
+                        <button class="btn btn-secondary" onclick={previousStep}>Back</button>
                     </div>
                     <button
                         class="btn btn-primary"
-                        on:click={nextStep}
+                        onclick={nextStep}
                     >
                         Next
                     </button>
                 {:else if currentStep === 4}
                     <div class="flex gap-2">
-                        <button class="btn btn-secondary" on:click={closeModal}>Cancel</button>
-                        <button class="btn btn-secondary" on:click={previousStep}>Back</button>
+                        <button class="btn btn-secondary" onclick={closeModal}>Cancel</button>
+                        <button class="btn btn-secondary" onclick={previousStep}>Back</button>
                     </div>
                     <button
                         class="btn btn-primary"
-                        on:click={nextStep}
+                        onclick={nextStep}
                         disabled={!taskDifficulty}
                     >
                         Next
                     </button>
                 {:else if currentStep === 5}
                     <div class="flex gap-2">
-                        <button class="btn btn-secondary" on:click={closeModal}>Cancel</button>
-                        <button class="btn btn-secondary" on:click={previousStep}>Back</button>
+                        <button class="btn btn-secondary" onclick={closeModal}>Cancel</button>
+                        <button class="btn btn-secondary" onclick={previousStep}>Back</button>
                     </div>
                     <button
                         class="btn btn-primary"
-                        on:click={nextStep}
+                        onclick={nextStep}
                     >
                         Next
                     </button>
                 {:else if currentStep === 6}
                     <div class="flex gap-2">
-                        <button class="btn btn-secondary" on:click={closeModal}>Cancel</button>
-                        <button class="btn btn-secondary" on:click={previousStep}>Back</button>
+                        <button class="btn btn-secondary" onclick={closeModal}>Cancel</button>
+                        <button class="btn btn-secondary" onclick={previousStep}>Back</button>
                     </div>
                     <button
                         class="btn btn-primary"
-                        on:click={createTask}
+                        onclick={createTask}
                         disabled={!taskTitle.trim() || isCreating}
                     >
                         {isCreating ? "Creating..." : `Create ${taskType.charAt(0).toUpperCase() + taskType.slice(1)}`}
@@ -417,10 +420,7 @@
         color: white;
     }
 
-    .step.completed {
-        background-color: #4f2a93;
-        color: white;
-    }
+
 
     .step.inactive {
         background-color: #e5e7eb;

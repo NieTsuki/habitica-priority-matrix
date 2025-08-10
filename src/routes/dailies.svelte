@@ -39,10 +39,10 @@
     <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold text-[#34313a] font-['Roboto_Condensed']">Dailies</h2>
         <div class="flex gap-2">
-            <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" on:click={loadDailies}>
+            <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" onclick={loadDailies}>
                 ↻ Reload
             </button>
-            <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" on:click={openModal}>
+            <button class="bg-[#6133b4] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#4f2a93] transition-colors cursor-pointer" onclick={openModal}>
                 + Add Daily
             </button>
         </div>
