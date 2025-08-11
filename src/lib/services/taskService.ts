@@ -4,11 +4,9 @@ import { TagService } from "./tagService";
 
 export class TaskService {
     private static instance: TaskService;
-    private habitica: Habitica;
     private tagService: TagService;
 
     private constructor() {
-        this.habitica = Habitica.instance!;
         this.tagService = TagService.getInstance();
     }
 
@@ -20,7 +18,7 @@ export class TaskService {
     }
 
     async fetchTasks(type: "dailys" | "todos"): Promise<{ [key: string]: Task }> {
-        const res = await this.habitica.call(`https://habitica.com/api/v3/tasks/user?type=${type}`);
+        const res = await Habitica.instance?.call(`https://habitica.com/api/v3/tasks/user?type=${type}`);
         const data = await res?.json();
         return data?.data || {};
     }
@@ -40,7 +38,11 @@ export class TaskService {
                 }
             }
 
-            const res = await this.habitica.call("https://habitica.com/api/v3/tasks/user", "POST", processedTaskData);
+            const res = await Habitica.instance?.call(
+                "https://habitica.com/api/v3/tasks/user",
+                "POST",
+                processedTaskData
+            );
 
             if (res?.ok) {
                 const data = await res.json();

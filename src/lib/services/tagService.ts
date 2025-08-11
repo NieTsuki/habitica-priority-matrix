@@ -8,12 +8,7 @@ export interface Tag {
 
 export class TagService {
     private static instance: TagService;
-    private habitica: Habitica;
     private importantTagId: string | null = null;
-
-    private constructor() {
-        this.habitica = Habitica.instance!;
-    }
 
     static getInstance(): TagService {
         if (!TagService.instance) {
@@ -24,7 +19,7 @@ export class TagService {
 
     async fetchTags(): Promise<Tag[]> {
         try {
-            const res = await this.habitica.call("https://habitica.com/api/v3/tags");
+            const res = await Habitica.instance?.call("https://habitica.com/api/v3/tags");
             if (res?.ok) {
                 const data = await res.json();
                 return data.data || [];
@@ -42,7 +37,7 @@ export class TagService {
                 name: "Important",
             };
 
-            const res = await this.habitica.call("https://habitica.com/api/v3/tags", "POST", tagData);
+            const res = await Habitica.instance?.call("https://habitica.com/api/v3/tags", "POST", tagData);
 
             if (res?.ok) {
                 const data = await res.json();
