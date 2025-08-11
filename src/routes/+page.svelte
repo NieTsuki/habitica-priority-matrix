@@ -8,7 +8,7 @@
   import Todos from "./todos.svelte";
   import Help from "./help.svelte";
 
-  let selectedTab: Tab = $state(Tab.Dailies);
+  let selectedTab: Tab = $state(Tab.Todos);
 
   function selectTab(tab: Tab) {
     selectedTab = tab;
