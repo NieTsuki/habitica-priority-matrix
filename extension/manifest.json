@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Habitica Priority Matrix",
+    "version": "1.0",
+    "description": "Adds a button to habitica.com that redirects to the priority matrix.",
+    "permissions": ["activeTab"],
+    "content_scripts": [
+        {
+            "matches": ["https://habitica.com/*"],
+            "js": ["content.js"],
+            "css": ["styles.css"]
+        }
+    ],
+    "icons": {
+        "48": "icon48.png",
+        "128": "icon128.png"
+    }
+}
