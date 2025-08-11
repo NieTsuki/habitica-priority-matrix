@@ -19,6 +19,7 @@
     let taskChecklist = $state([{ text: "", completed: false }]);
     let taskDifficulty: string | null = $state(null);
     let taskDueDate = $state("");
+    let taskStartDate = $state("");
     let taskImportant = $state(false);
     let isCreating = $state(false);
 
@@ -33,6 +34,7 @@
         taskChecklist = [{ text: "", completed: false }];
         taskDifficulty = null;
         taskDueDate = "";
+        taskStartDate = "";
         taskImportant = false;
         isCreating = false;
         draggedItem = null;
@@ -137,8 +139,10 @@
                 newTask.checklist = taskChecklist.filter(item => item.text.trim());
             }
 
-            if (taskDueDate) {
+            if (taskType === "todo" && taskDueDate) {
                 newTask.date = taskDueDate;
+            } else if (taskType === "daily" && taskStartDate) {
+                newTask.startDate = taskStartDate;
             }
 
             try {
@@ -264,15 +268,27 @@
                     </select>
                 </div>
             {:else if currentStep === 5}
-                <div class="form-group">
-                    <label class="form-label" for="task-due-date">When is this task due?</label>
-                    <input
-                        id="task-due-date"
-                        type="date"
-                        class="form-input"
-                        bind:value={taskDueDate}
-                    />
-                </div>
+                {#if taskType === "todo"}
+                    <div class="form-group">
+                        <label class="form-label" for="task-due-date">When is this to-do due?</label>
+                        <input
+                            id="task-due-date"
+                            type="date"
+                            class="form-input"
+                            bind:value={taskDueDate}
+                        />
+                    </div>
+                {:else}
+                    <div class="form-group">
+                        <label class="form-label" for="task-start-date">When should this daily start?</label>
+                        <input
+                            id="task-start-date"
+                            type="date"
+                            class="form-input"
+                            bind:value={taskStartDate}
+                        />
+                    </div>
+                {/if}
             {:else if currentStep === 6}
                 <div class="form-group">
                     <label class="form-label" for="task-important">Is this task important?</label>
@@ -450,6 +466,21 @@
         outline: none;
         border-color: #6133b4;
         box-shadow: 0 0 0 3px rgba(97, 51, 180, 0.1);
+    }
+
+    #task-difficulty {
+        padding-right: 2.5rem !important;
+        background-image: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+
+    #task-difficulty {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        background-size: 1rem !important;
     }
 
     .form-textarea {

@@ -53,7 +53,7 @@
           </ul>
         </div>
 
-        <p class="text-[#4e4a57] text-sm"><strong>Note:</strong> Tasks without due dates are never considered urgent.</p>
+        <p class="text-[#4e4a57] text-sm"><strong>Note:</strong> Tasks without due dates are never considered urgent. Since daily tasks don't have due dates, no dailies will be marked as urgent.</p>
       </div>
     </section>
 

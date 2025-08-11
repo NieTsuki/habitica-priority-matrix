@@ -29,7 +29,8 @@ export interface Task {
     updatedAt: string;
     userId: string;
     id: string;
-    date?: string;
+    date?: string; // Only available for todos
+    startDate?: string; // Only available for dailies
 }
 
 export interface CreateTaskData {
@@ -38,8 +39,9 @@ export interface CreateTaskData {
     priority: number;
     notes?: string;
     checklist?: Array<{ text: string; completed: boolean }>;
-    date?: string;
+    date?: string; // Only for todos
+    startDate?: string; // Only for dailies
     tags?: string[];
 }
 
-export type TaskType = "todo" | "daily" | "habit" | "reward";
+export type TaskType = "daily" | "todo";
